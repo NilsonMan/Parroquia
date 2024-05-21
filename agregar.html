@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"] {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/donaciones">Donaciones</a>
+        <a href="/criptas">Criptas</a>
+        <a href="/menu_principal">Menu Principal</a>
+    </div>
+    <div class="container">
+        <h1>Criptas</h1>
+
+        <!-- Formulario para agregar nuevo cliente -->
+        <form action="/agregar_cliente" method="post">
+            <label for="num_nuevo">NUM. NUEVO:</label>
+            <input type="text" id="num_nuevo" name="num_nuevo" required><br>
+
+            <label for="titular">TITULAR:</label>
+            <input type="text" id="titular" name="titular" required><br>
+
+            <label for="apellido_paterno">APELLIDO PATERNO:</label>
+            <input type="text" id="apellido_paterno" name="apellido_paterno" required><br>
+
+            <label for="apellido_materno">APELLIDO MATERNO:</label>
+            <input type="text" id="apellido_materno" name="apellido_materno" required><br>
+
+            <label for="familia_id">FAMILIA ID:</label>
+            <input type="text" id="familia_id" name="familia_id" required><br>
+
+            <label for="cripta">CRIPTA:</label>
+            <input type="text" id="cripta" name="cripta" required><br>
+
+            <input type="submit" value="Agregar Cliente">
+        </form>
+
+
+        <!-- Tabla para mostrar los clientes -->
+        <div style="overflow-x:auto;">
+            <table id="tabla-criptas">
+                <thead>
+                    <tr>
+                        <th>NUM. NUEVO</th>
+                        <th>TITULAR</th>
+                        <th>APELLIDO PATERNO</th>
+                        <th>APELLIDO MATERNO</th>
+                        <th>FAMILIA ID</th>
+                        <th>CRIPTA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente[0] }}</td>
+                        <td>{{ cliente[1] }}</td>
+                        <td>{{ cliente[2] }}</td>
+                        <td>{{ cliente[3] }}</td>
+                        <td>{{ cliente[4] }}</td>
+                        <td>{{ cliente[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+

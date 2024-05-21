@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Difuntos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        form input[type="text"],
+        form input[type="date"],
+        form select {
+            width: calc(100% - 10px);
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/donaciones">Donaciones</a>
+        <a href="/agregar">Agregar</a>
+        <a href="/menu_principal">Menu Principal</a>
+        <a href="/difuntos">Difuntos</a>
+    </div>
+    <div class="container">
+        <h1>Registro de Difuntos</h1>
+
+        <!-- Formulario para agregar difunto -->
+        <form action="/agregar_difunto" method="post">
+            <label for="nombre_completo">Nombre Completo:</label>
+            <input type="text" id="nombre_completo" name="nombre_completo" required><br>
+
+            <label for="apellido_paterno">Apellido Paterno:</label>
+            <input type="text" id="apellido_paterno" name="apellido_paterno" required><br>
+
+            <label for="apellido_materno">Apellido Materno:</label>
+            <input type="text" id="apellido_materno" name="apellido_materno" required><br>
+
+            <label for="fecha_defuncion">Fecha de Defunción:</label>
+            <input type="date" id="fecha_defuncion" name="fecha_defuncion" required><br>
+
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required><br>
+
+            <label for="familia_id">Familia:</label>
+            <select id="familia_id" name="familia_id" required>
+                {% for familia in familias %}
+                <option value="{{ familia[0] }}">{{ familia[1] }} {{ familia[2] }} {{ familia[3] }}</option>
+                {% endfor %}
+            </select><br>
+
+            <input type="submit" value="Agregar Difunto">
+        </form>
+
+        <!-- Tabla para mostrar difuntos -->
+        <div style="overflow-x:auto;">
+            <table id="tabla-difuntos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Completo</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Familia</th>
+                        <th>Fecha de Defunción</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for difunto in difuntos %}
+                    <tr>
+                        <td>{{ difunto[0] }}</td>
+                        <td>{{ difunto[1] }}</td>
+                        <td>{{ difunto[2] }}</td>
+                        <td>{{ difunto[3] }}</td>
+                        <td>{{ difunto[4] }}</td>
+                        <td>{{ difunto[5] }}</td>
+                        <td>{{ difunto[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
