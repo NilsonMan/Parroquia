@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios con 'b' en criptas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Usuarios con 'b' en criptas</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>NUM. NUEVO</th>
+                <th>TITULAR</th>
+                <th>FAMILIA</th>
+                <th>OBSERVACION</th>
+                <th>SALDOS 2024</th>
+                <th>SALDO</th>
+                <th>ABONO/PAGO</th>
+                <th>SALDO TOTAL</th>
+                <th>NOTAS</th>
+                <th>CRIPTA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{ cliente[0] }}</td>
+                <td>{{ cliente[1] }}</td>
+                <td>{{ cliente[2] }}</td>
+                <td>{{ cliente[3] }}</td>
+                <td>{{ cliente[4] }}</td>
+                <td>{{ cliente[5] }}</td>
+                <td>{{ cliente[6] }}</td>
+                <td>{{ cliente[7] }}</td>
+                <td>{{ cliente[8] }}</td>
+                <td>{{ cliente[9] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

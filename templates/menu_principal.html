@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .boton {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .boton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/donaciones">Donaciones</a>
+        <a href="/agregar">Agregar</a>
+            <a href="/menu_principal">Menu Principal</a>
+            <a href="/difuntos">Difuntos</a>
+        </div>
+        <div class="container">
+            <h1>¡Bienvenido al Menú Principal!</h1>
+            <!-- Botón para filtrar usuarios con 'a' en criptas -->
+            <a href="{{ url_for('usuarios_con_a') }}" class="boton">Usuarios con 'a' en criptas</a>
+            <a href="{{ url_for('usuarios_con_b') }}" class="boton">Usuarios con 'b' en criptas</a>
+
+        </div>
+    </body>
+    </html>
