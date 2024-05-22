@@ -12,6 +12,37 @@ usuarios = {
 # Funciones de base de datos
 def conectar_db():
     return sqlite3.connect('tu_basede_datos.db')
+
+def buscar_bd(query):
+    conn = conectar_db()
+    cursor = conn.cursor()
+    query = f"%{query}%"
+    
+    # Buscar en tabla Difuntos
+    cursor.execute('''
+        SELECT 'Difunto' AS tipo, nombre_completo, apellido_paterno, apellido_materno, fecha_defuncion, fecha, familia_id 
+        FROM Difuntos 
+        WHERE nombre_completo LIKE ? OR apellido_paterno LIKE ? OR apellido_materno LIKE ?
+    ''', (query, query, query))
+    difuntos = cursor.fetchall()
+    
+    # Buscar en tabla Clientes
+    cursor.execute('''
+        SELECT 'Cliente' AS tipo, Num_nuevo, Nombre_titular, Apellido_paterno, Apellido_materno, Familia_id, Cripta 
+        FROM Clientes 
+        WHERE Nombre_titular LIKE ? OR Apellido_paterno LIKE ? OR Apellido_materno LIKE ?
+    ''', (query, query, query))
+    clientes = cursor.fetchall()
+    
+    conn.close()
+    return difuntos + clientes
+
+@app.route("/buscar")
+def buscar():
+    query = request.args.get('query')
+    resultados = buscar_bd(query)
+    return render_template("resultados_busqueda.html", query=query, resultados=resultados)
+
 @app.route("/agregar_difunto", methods=["POST"])
 def agregar_difunto():
     nombre_completo = request.form["nombre_completo"]
@@ -30,7 +61,6 @@ def agregar_difunto():
     conn.close()
     
     return redirect(url_for("difuntos"))
-
 
 def agregar_cliente(num_nuevo, titular, apellido_paterno, apellido_materno, familia_id, cripta):
     conn = conectar_db()
@@ -53,6 +83,7 @@ def obtener_familias():
     familias = cursor.fetchall()
     conn.close()
     return familias
+
 def obtener_difuntos():
     conn = conectar_db()
     cursor = conn.cursor()
@@ -60,8 +91,6 @@ def obtener_difuntos():
     difuntos = cursor.fetchall()
     conn.close()
     return difuntos
-
-
 
 def obtener_clientes(letra=None):
     conn = conectar_db()
@@ -79,15 +108,11 @@ def obtener_clientes(letra=None):
 def inicio():
     return render_template("inicio_sesion.html")
 
-
-
-
 @app.route("/difuntos")
 def difuntos():
     familias = obtener_clientes()
     difuntos = obtener_difuntos()
     return render_template("difuntos.html", familias=familias, difuntos=difuntos)
-
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -101,7 +126,6 @@ def login():
 @app.route("/menu_principal")
 def menu_principal():
     return render_template("menu_principal.html")
-
 
 @app.route("/agregar")
 def agregar():
@@ -141,7 +165,6 @@ def agregar_cliente_route():
     
     clientes = obtener_clientes()  
     return render_template("agregar.html", clientes=clientes)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
