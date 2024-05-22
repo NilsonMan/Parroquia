@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados de Búsqueda para "{{ query }}"</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Nombre Completo</th>
+                    <th>Apellido Paterno</th>
+                    <th>Apellido Materno</th>
+                    <th>Fecha Defunción</th>
+                    <th>Fecha</th>
+                    <th>Familia ID</th>
+                    <th>Num. Nuevo</th>
+                    <th>Titular</th>
+                    <th>Cripta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for resultado in resultados %}
+                <tr>
+                    <td>{{ resultado[0] }}</td>
+                    <td>{{ resultado[1] }}</td>
+                    <td>{{ resultado[2] }}</td>
+                    <td>{{ resultado[3] }}</td>
+                    <td>{{ resultado[4] if resultado[0] == 'Difunto' else 'N/A' }}</td>
+                    <td>{{ resultado[5] if resultado[0] == 'Difunto' else 'N/A' }}</td>
+                    <td>{{ resultado[6] if resultado[0] == 'Difunto' else 'N/A' }}</td>
+                    <td>{{ resultado[1] if resultado[0] == 'Cliente' else 'N/A' }}</td>
+                    <td>{{ resultado[2] if resultado[0] == 'Cliente' else 'N/A' }}</td>
+                    <td>{{ resultado[6] if resultado[0] == 'Cliente' else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
